@@ -1,9 +1,11 @@
 package com.miscbits.officehours.models;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@Entity
 public class Appointment {
     @NotNull
     @Size(min = 5)
