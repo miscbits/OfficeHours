@@ -17,7 +17,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public Appointment findOne(Long id) {
-        return appointmentDao.findOne(id);
+        return appointmentDao.findOneById(id);
     }
 
     @Override

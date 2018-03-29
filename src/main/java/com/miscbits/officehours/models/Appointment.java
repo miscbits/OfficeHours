@@ -1,7 +1,6 @@
 package com.miscbits.officehours.models;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -11,8 +10,20 @@ public class Appointment {
     @Size(min = 5)
     private String time;
 
-    @ManyToMany
+    @ManyToOne
     private User user;
+
+    public Appointment() {
+    }
+
+    public Appointment(@NotNull @Size(min = 5) String time, User user) {
+        this.time = time;
+        this.user = user;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     public User getUser() {
         return user;
@@ -22,13 +33,8 @@ public class Appointment {
         this.user = user;
     }
 
-    public Appointment(String time) {
-        this();
-        this.time = time;
-    }
-
-    protected Appointment() {
-        super();
+    public Long getId() {
+        return id;
     }
 
     public String getTime() {

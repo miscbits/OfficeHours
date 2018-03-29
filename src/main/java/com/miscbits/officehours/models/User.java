@@ -1,6 +1,5 @@
 package com.miscbits.officehours.models;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,12 +14,12 @@ import java.util.List;
 
 @Entity
 public class User implements UserDetails{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
-
 
     @Column(unique = true)
     @Size(min = 8, max = 20)
@@ -32,8 +31,12 @@ public class User implements UserDetails{
     @Column(nullable = false)
     private boolean enabled;
 
+    public User() {
+    }
+
     @OneToOne
     @JoinColumn(name = "role_id")
+
     private Role role;
 
     public Long getId() {
@@ -42,6 +45,13 @@ public class User implements UserDetails{
 
     public String getUsername() {
         return username;
+    }
+
+    public User(@Size(min = 8, max = 20) String username, @Size(max = 100) String password, boolean enabled, Role role) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.role = role;
     }
 
     @Override
