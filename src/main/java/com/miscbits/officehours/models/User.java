@@ -22,7 +22,7 @@ public class User implements UserDetails{
     public static final PasswordEncoder PASSWORD_ENCODER = new BCryptPasswordEncoder();
 
     @Column(unique = true)
-    @Size(min = 8, max = 20)
+    @Size(min = 3, max = 20)
     private String username;
 
     @Size(max = 100)
